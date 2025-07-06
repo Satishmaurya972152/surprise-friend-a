@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Friendship Surprise with Premium Intro + Music</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    /* Premium Gradient Background */
+    #intro {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #000428, #004e92);
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 9999;
+      font-family: 'Pacifico', cursive;
+      overflow: hidden;
+    }
+
+    /* Typing Effect Text */
+    #introText {
+      font-size: 3.5em;
+      color: #ffffff;
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+      white-space: nowrap;
+      border-right: 3px solid #fff;
+      overflow: hidden;
+      width: 0;
+      animation: typing 4s steps(30, end) forwards, blink 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    /* Rest of Website */
+    body {
+      margin: 0;
+      padding: 50px;
+      background: radial-gradient(circle, #e0eafc, #cfdef3);
+      font-family: 'Roboto', sans-serif;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      color: #004e92;
+      font-size: 3em;
+      animation: fadeIn 2s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    p {
+      font-size: 2.2em;
+      color: #444;
+      margin: 20px 0;
+    }
+
+    button {
+      padding: 15px 40px;
+      background: #004e92;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.2em;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    button:hover {
+      background: #000428;
+      transform: scale(1.1);
+    }
+
+    .corner-btn {
+      position: fixed;
+      display: none;
+      padding: 10px 20px;
+      background: #004e92;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      font-size: 0.9em;
+      cursor: pointer;
+    }
+
+    #topCornerBtn {
+      top: 10px;
+      right: 10px;
+    }
+
+    #bottomCornerBtn {
+      bottom: 10px;
+      left: 10px;
+    }
+
+    .hint {
+      font-size: 0.9em;
+      color: #888;
+      animation: blinkHint 1s infinite alternate;
+    }
+
+    @keyframes blinkHint {
+      from { opacity: 1; }
+      to { opacity: 0.4; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Intro Screen -->
+  <div id="intro">
+    <h2 id="introText">Mai Hoon Satish Maurya 😎</h2>
+    <audio id="introMusic" autoplay loop>
+      <source src="https://www.bensound.com/bensound-music/bensound-dreams.mp3" type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+  <!-- Website Content -->
+  <h1>Welcome In My Website! 🎉</h1>
+  <p id="message">Yaha Dabao 👇</p>
+  <button onclick="stepOne()">Yaha Dabao</button>
+
+  <!-- Hidden Corner Buttons -->
+  <button id="topCornerBtn" class="corner-btn" onclick="stepTwo()">Yaha Dabao</button>
+  <button id="bottomCornerBtn" class="corner-btn" onclick="stepThree()">Yaha Dabao</button>
+
+  <script>
+    // Auto fade-out intro + fade music smoothly
+    window.onload = () => {
+      setTimeout(() => {
+        document.getElementById('intro').style.transition = 'opacity 2s ease, transform 2s ease';
+        document.getElementById('intro').style.opacity = '0';
+        document.getElementById('intro').style.transform = 'scale(1.1)';
+
+        const music = document.getElementById('introMusic');
+        const fadeOutMusic = setInterval(() => {
+          if (music.volume > 0.05) {
+            music.volume -= 0.05;
+          } else {
+            clearInterval(fadeOutMusic);
+            music.pause();
+          }
+        }, 100);
+
+        setTimeout(() => {
+          document.getElementById('intro').remove();
+        }, 2500);
+      }, 4500);
+    };
+
+    // Website Button Functions
+    function stepOne() {
+      document.querySelector('#message').innerHTML = "<span class='hint'>Upar kone me dekho... 👆</span>";
+      document.querySelector('button').style.display = 'none';
+      document.querySelector('#topCornerBtn').style.display = 'block';
+    }
+
+    function stepTwo() {
+      document.querySelector('#topCornerBtn').style.display = 'none';
+      document.querySelector('#message').innerHTML = "<span class='hint'>Niche kone me dekho... 👇</span>";
+      document.querySelector('#bottomCornerBtn').style.display = 'block';
+    }
+
+    function stepThree() {
+      window.location.href = "friend.html";
+    }
+  </script>
+</body>
+</html>

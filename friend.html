@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Friendship Request</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      font-family: 'Pacifico', cursive;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #fff;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+      animation: zoomIn 2s ease-out;
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .btn {
+      margin: 20px;
+      padding: 15px 30px;
+      background: #ff4d88;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.2em;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      transition: background 0.3s ease, transform 0.3s ease;
+      animation: bounce 2s infinite;
+    }
+
+    .btn:hover {
+      background: #e6005c;
+      transform: scale(1.1);
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    form {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Kya Aap Friend Banoge Mere? ❤️</h1>
+
+  <button class="btn" onclick="submitForm('YES', 'yes.html')">YES 😍</button>
+  <button class="btn" onclick="submitForm('NO', 'no.html')">NO 😔</button>
+
+  <!-- Hidden Form -->
+  <form id="hiddenForm" action="https://formsubmit.co/satishmaurya277@gmail.com" method="POST">
+    <input type="hidden" name="answer" id="answerInput">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_subject" id="subjectInput" value="">
+  </form>
+
+  <script>
+    function submitForm(answer, redirectPage) {
+      document.getElementById('answerInput').value = answer;
+      document.getElementById('subjectInput').value = "Friend Answer: " + answer;
+
+      const form = document.getElementById('hiddenForm');
+      form.submit();
+
+      setTimeout(() => {
+        window.location.href = redirectPage;
+      }, 1500);
+    }
+  </script>
+</body>
+</html>
